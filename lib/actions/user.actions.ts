@@ -9,6 +9,8 @@ export async function createUser(user: CreateUserParams) {
     try {
         await connectToDatabase()
         const newUser = await User.create(user)
+        console.log("User created");
+        
         return JSON.parse(JSON.stringify(newUser))
     } catch (error) {
         handleError(error)
@@ -28,7 +30,9 @@ export async function getUserById(UserId: string){
 
 export async function updateUser(clerkId: string, user: UpdateUserParams){
     try {
-        await connectToDatabase()
+        const res = await connectToDatabase()
+        console.log(res);
+        
         const updatedUser = await User.findOneAndUpdate({clerkId}, user, {new: true})
         if (!updatedUser) throw new Error('User not found')
         return JSON.parse(JSON.stringify(updatedUser))
