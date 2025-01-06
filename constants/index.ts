@@ -131,7 +131,7 @@ export const navLinks = [
       type: "removeBackground",
       title: "Background Remove",
       subTitle: "Removes the background of the image using AI",
-      config: { removeBackground: true },
+      config: { removeBackground: false },
       icon: "camera.svg",
     },
     fill: {
