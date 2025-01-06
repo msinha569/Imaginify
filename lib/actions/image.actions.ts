@@ -117,9 +117,12 @@ export async function getAllImages({ limit = 9, page = 1, searchQuery = '' }: {
     const { resources } = await cloudinary.search
       .expression(expression)
       .execute();
-
+    console.log(resources);
+    
     const resourceIds = resources.map((resource: any) => resource.public_id);
-
+    const secureURL = resources.map((resource: any) => resource.secure_url);
+    console.log("secureurl:",  JSON.parse(JSON.stringify(secureURL)));
+    
     let query = {};
 
     if(searchQuery) {
@@ -178,5 +181,40 @@ export async function getUserImages({
     };
   } catch (error) {
     handleError(error);
+  }
+}
+
+// GET IMAGES
+export async function getOtherImages({ searchQuery = '' }: {
+  searchQuery?: string;
+}) {
+  try {
+
+    cloudinary.config({
+      cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET,
+      secure: true,
+    })
+
+    let expression = 'folder=imaginify';
+
+    if (searchQuery) {
+      expression += ` AND ${searchQuery}`
+    }
+
+    const { resources } = await cloudinary.search
+      .expression(expression)
+      .execute();
+    console.log(resources);
+    
+    const secureURL = resources.map((resource: any) => resource.secure_url);
+
+    return {
+      data: JSON.parse(JSON.stringify(secureURL)),
+      
+    }
+  } catch (error) {
+    handleError(error)
   }
 }

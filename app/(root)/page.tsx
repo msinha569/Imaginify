@@ -1,6 +1,6 @@
 import { Collection } from '@/components/shared/Collection'
 import { navLinks } from '@/constants'
-import { getAllImages } from '@/lib/actions/image.actions'
+import { getAllImages, getOtherImages } from '@/lib/actions/image.actions'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -10,6 +10,9 @@ const Home = async({ searchParams}: SearchParamProps) => {
   const searchQuery = (searchParams?.query as string) || ''
 
   const images = await getAllImages({page, searchQuery})
+  const cloudImages:any = await getOtherImages({searchQuery})
+  console.log("cloudImages:", cloudImages.data);
+  
   return (
     <div>
       <section className='home'>
@@ -44,6 +47,19 @@ const Home = async({ searchParams}: SearchParamProps) => {
         totalPages={images?.totalPage}
         page={page}
         />
+      </section>
+
+      <section className='flex gap-5 flex-row flex-wrap rounded-lg mt-20'>
+         { cloudImages && cloudImages.data.map((image:any,index) => (
+            <div key={index} className='transition-transform duration-300 ease-in-out hover:scale-110'>
+              <img
+              className='rounded-lg'
+              src={image}
+              alt={image}
+              width={200}
+              height={200}/>
+            </div>
+         ))}
       </section>
      
     </div>
