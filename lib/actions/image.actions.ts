@@ -117,11 +117,9 @@ export async function getAllImages({ limit = 9, page = 1, searchQuery = '' }: {
     const { resources } = await cloudinary.search
       .expression(expression)
       .execute();
-    console.log(resources);
     
     const resourceIds = resources.map((resource: any) => resource.public_id);
     const secureURL = resources.map((resource: any) => resource.secure_url);
-    console.log("secureurl:",  JSON.parse(JSON.stringify(secureURL)));
     
     let query = {};
 
@@ -206,7 +204,6 @@ export async function getOtherImages({ searchQuery = '' }: {
     const { resources } = await cloudinary.search
       .expression(expression)
       .execute();
-    console.log(resources);
     
     const secureURL = resources.map((resource: any) => resource.secure_url);
 

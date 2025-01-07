@@ -11,7 +11,6 @@ const Home = async({ searchParams}: SearchParamProps) => {
 
   const images = await getAllImages({page, searchQuery})
   const cloudImages:any = await getOtherImages({searchQuery})
-  console.log("cloudImages:", cloudImages.data);
   
   return (
     <div>
@@ -50,7 +49,7 @@ const Home = async({ searchParams}: SearchParamProps) => {
       </section>
 
       <section className='flex gap-5 flex-row flex-wrap rounded-lg mt-20'>
-         { cloudImages && cloudImages.data.map((image:any,index) => (
+         { cloudImages && cloudImages.data.map((image:any,index:any) => (
             <div key={index} className='transition-transform duration-300 ease-in-out hover:scale-110'>
               <img
               className='rounded-lg'

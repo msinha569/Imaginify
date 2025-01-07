@@ -13,13 +13,8 @@ import {
   } from "@/components/ui/select"
   
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+  Form
+ 
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { aspectRatioOptions, creditFee, defaultValues, transformationTypes } from "@/constants"
@@ -51,9 +46,6 @@ const TransformationForm = ({action, data = null, userId, type, creditBalance}:T
     const [transformationConfig, setTransformationConfig] = useState<Transformations | null>(null)
     const [isPending, startTransition] = useTransition()
     const router = useRouter()
-    console.log(transformationConfig);
-    console.log(transformationType);
-    console.log(newTransformation);
     
     
     const initialValues = data && action === 'Update' ? {
@@ -154,8 +146,8 @@ const TransformationForm = ({action, data = null, userId, type, creditBalance}:T
                     [fieldName === 'prompt' ? 'prompt' : 'to']: value
                 }
             }))
+          },1000)()
             return onChangeField(value)
-        },1000)
       }
 
       const onTransformHandler = async() => {
@@ -207,6 +199,7 @@ const TransformationForm = ({action, data = null, userId, type, creditBalance}:T
                 render={({field}) => (
                     <Select
                     onValueChange={(value) => onSelectFieldHandler(value, field.onChange)}
+                    value={field.value}
                     >
                         <SelectTrigger className="select-field">
                             <SelectValue placeholder="Select size" />

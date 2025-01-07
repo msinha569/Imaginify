@@ -15,9 +15,6 @@ const TransformedImage = ({ image, type, title, transformationConfig, isTransfor
         src: image?.publicId,
         ...transformationConfig
       })
-      console.log(downloadUrl);
-      console.log("downloadUrl lets see");
-      
     download(downloadUrl, title)
   }
 
