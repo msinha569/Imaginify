@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 // ====== USER PARAMS
 declare type CreateUserParams = {
   clerkId: string;
@@ -111,9 +113,8 @@ declare type RemoveUrlQueryParams = {
   keysToRemove: string[];
 };
 
-// Adjusted SearchParamProps to use a Promise for `params`
 declare type SearchParamProps = {
-  params: Promise<{ id: string; type: TransformationTypeKey }>;
+  params: { id: string; type: TransformationTypeKey };
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
